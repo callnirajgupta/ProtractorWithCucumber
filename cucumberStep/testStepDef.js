@@ -1,4 +1,5 @@
 let homepage=require('../pages/homepage.js');
+let inputdata=require('../data/inputdata.json');
 const { Before, Given, When, Then } = require('cucumber');
 var {setDefaultTimeout} = require('cucumber');
 Before({timeout: 60 * 1000}, function() {
@@ -8,7 +9,8 @@ Given('enter the url', async() => {
     // Write code here that turns the phrase above into concrete actions
     const EC = protractor.ExpectedConditions;
     browser.ignoreSynchronization = true;
-      await browser.get('http://automationpractice.com/index.php');
+      //await browser.get('http://automationpractice.com/index.php');
+      await browser.get(inputdata.url);
         
       await browser.wait(EC.elementToBeClickable($('a[class="login"]')), 10000);
         
@@ -20,8 +22,8 @@ Given('enter the url', async() => {
     // Write code here that turns the phrase above into concrete actions
     homepage.waitforelement();
 
-    homepage.enteremail('callnirajgupta@gmail');
-    homepage.enterpassword('password');
+    homepage.enteremail(inputdata.email);
+    homepage.enterpassword(inputdata.password);
     homepage.clicklogin();
   });
 
